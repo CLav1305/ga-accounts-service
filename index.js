@@ -1,6 +1,18 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'; //dotenv is a pakcage that lets us use env variables
+dotenv.config(); // we call to initialise dotenv
+import express from "express"; //frameowrk for building apis
 
-const port = process.env.PORT;
+const port = process.env.PORT; // geet the PORT varible from the .env file
+const app = express(); //create a new express app
 
-console.log(port);
+app.use(express.json()); // this configures express to read rq body when a user sends data
+
+async function startServer() { // async function can wait for things to happen (await)
+  try { // try to start hte server using app.listen
+    app.listen(port, () => console.log(`🤖 Listening on Port: ${port}`));
+  } catch (err) { //if theres an error tell us
+    console.log("🤖 Oh no something went wrong", err);
+  }
+}
+
+startServer();
